@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: argocd-hello
+  name: argocd-jq-demo
   labels:
-    app: argocd-hello
+    app: argocd-jq-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: argocd-hello
+      app: argocd-jq-demo
   template:
     metadata:
       labels:
-        app: argocd-hello
+        app: argocd-jq-demo
     spec:
       containers:
-        - name: go-hello-http
+        - name: argocd-jq-demo-http
           image: "{{ .Values.image.repository }}:{{ default .Values.image.tag }}"
           ports:
             - containerPort: 80
