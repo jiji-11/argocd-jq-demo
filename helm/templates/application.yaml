@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-jq-demo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jiji-11/argocd-jq-demo.git
+    targetRevision: HEAD
+    path: argocd-jq-demo
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd-jq-demo
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jqPathExpressions: 'until(true == false; [.] + [1])'
